@@ -8,6 +8,8 @@
 
 import Foundation
 
+// MARK: - Protocol for delegate, at transporting data
+
 protocol CurrentMemeDelegate {
     func transmittingIdMeme(id: String) 
 }

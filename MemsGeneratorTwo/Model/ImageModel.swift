@@ -8,6 +8,8 @@
 
 import Foundation
 
+// MARK: - Model for loading image
+
 struct ImageModel {
     let imageData: Data
     init(json: Data) {

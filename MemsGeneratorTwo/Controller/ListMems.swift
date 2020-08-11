@@ -23,18 +23,22 @@ class ListMems: UITableViewController {
         return searchController.isActive && !searchBarIsEmpty
     }
     private let searchController = UISearchController(searchResultsController: nil)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         listSetup()
         search()
     }
-    // MARK: - Table view data source
+    
+    // MARK: - Table view data source.
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering {
             return filteredMems.count
         }
         return arrayMems.count
     }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         var memos: String
@@ -47,6 +51,7 @@ class ListMems: UITableViewController {
         self.textIndexPath = memos
         return cell
     }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var mems = ""
         if let indexPath = tableView.indexPathForSelectedRow {
@@ -61,17 +66,21 @@ class ListMems: UITableViewController {
         navigationController?.popViewController(animated: true)
     }
 }
+
+// MARK: - Work over UISearchController.
+
 extension ListMems: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         filterForSearchText(searchController.searchBar.text!)
     }
+    
     func filterForSearchText(_ searchText: String) {
-        
         filteredMems = arrayMems.filter({ (mems: String) -> Bool in
             return mems.lowercased().contains(searchText.lowercased())
         })
         tableView.reloadData()
     }
+    
     func search() {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -79,9 +88,11 @@ extension ListMems: UISearchResultsUpdating {
         navigationItem.searchController = searchController
         definesPresentationContext = true
     }
+    
+    // MARK: - Network Service. Load list memes.
+    
     func listSetup() {
         let urlListMems = "https://ronreiter-meme-generator.p.rapidapi.com/images"
-       
         ListNetworkService.getList(url: urlListMems) { (response) in
             self.arrayMems = response.array
             self.tableView.reloadData()

@@ -12,6 +12,9 @@ import Alamofire
 class NetworkService {
     private init() {}
     static let shared = NetworkService()
+    
+    // MARK: - Basic methods for working with the network
+
     func downloadList(urlString: String, completion: @escaping ([String]) -> Void) {
         let headers: HTTPHeaders = [
             "x-rapidapi-host": "ronreiter-meme-generator.p.rapidapi.com",

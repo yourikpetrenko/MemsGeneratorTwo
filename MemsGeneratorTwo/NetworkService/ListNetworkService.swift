@@ -7,8 +7,12 @@
 //
 
 import Foundation
+
 class ListNetworkService {
-    private init() {}    
+    private init() {}
+    
+    // MARK: - Network Service. Methods for loading list.
+    
     static func getList(url: String, completion: @escaping(ListModel) -> ()) {
         NetworkService.shared.downloadList(urlString: url) { (json) in
             do {
