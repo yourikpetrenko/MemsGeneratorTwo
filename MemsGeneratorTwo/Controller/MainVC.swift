@@ -27,7 +27,7 @@ class MainVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fontLoad()
+        loadingFonts()
         textFieldTopOutlet.delegate = self
         textFieldBottomOutlet.delegate = self
         createPickerView()
@@ -37,7 +37,7 @@ class MainVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        setupImage()
+        downloadTheSelectedMeme()
     }
     
     // MARK: - Botton to open the list of memes
@@ -49,7 +49,7 @@ class MainVC: UIViewController {
     // MARK: - Generatting meme
 
     @IBAction func memeGeneratingButton(_ sender: UIButton) {
-        generateImage()
+        generatingMame()
     }
     
     // MARK: - Button for cleaning screen
@@ -67,8 +67,8 @@ class MainVC: UIViewController {
     @IBAction func toShareButtom(_ sender: UIBarButtonItem) {
         presentActivityViewController()
     }
-    
 }
+
 extension MainVC: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, CurrentMemeDelegate {
    
     // MARK: - Setting UIPickerView
@@ -122,7 +122,7 @@ extension MainVC: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDeleg
     
     // MARK: - Networking Service. Load fonts list.
     
-    func fontLoad() {
+    func loadingFonts() {
         let urlFonts = "https://ronreiter-meme-generator.p.rapidapi.com/fonts"
         ListNetworkService.getList(url: urlFonts) { (arrayFont) in
             self.arrayFont = arrayFont.array
@@ -131,7 +131,7 @@ extension MainVC: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDeleg
     
     // MARK: - Networking Service. Load selected image.
 
-    func setupImage() {
+    func downloadTheSelectedMeme() {
         let urlImage = "https://ronreiter-meme-generator.p.rapidapi.com/meme?meme=\(currentMem)&top=%20&bottom=%20"
         if imageOutlet.image == nil {
             activityIndicator.isHidden = false
@@ -151,8 +151,8 @@ extension MainVC: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDeleg
     
     // MARK: - Network Service. Generate memos.
 
-    func generateImage() {
-        editText()
+    func generatingMame() {
+        convertingTextForUrl()
         let urlDoneMem = "https://ronreiter-meme-generator.p.rapidapi.com/meme?font=\(urlFont ?? "")&font_size=50&meme=\(currentMem)&top=\(urlTop ?? "")&bottom=\(urlBottom ?? "")"
         ImageNetworkService.getList(url: urlDoneMem) { (image) in
             DispatchQueue.main.async {
@@ -163,7 +163,7 @@ extension MainVC: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDeleg
     
     // MARK: - Adaptation of the text for the url address.
 
-    func editText() {
+    func convertingTextForUrl() {
         urlTop = textFieldTopOutlet.text?.components(separatedBy: " ").filter { !$0.isEmpty }.joined(separator: "%20")
         urlBottom = textFieldBottomOutlet.text?.components(separatedBy: " ").filter { !$0.isEmpty }.joined(separator: "%20")
         urlFont = textFieldFontOutlet.text?.components(separatedBy: " ").filter { !$0.isEmpty }.joined(separator: "%20")
@@ -203,8 +203,10 @@ extension MainVC: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDeleg
     // MARK: - Raising the context above the keyboard.
      
      func registerForKeyboardNotifications() {
-         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow),
+                                                name: UIResponder.keyboardWillShowNotification, object: nil)
+         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide),
+                                                name: UIResponder.keyboardWillHideNotification, object: nil)
      }
      
     func remoteKeyboardNotifications() {

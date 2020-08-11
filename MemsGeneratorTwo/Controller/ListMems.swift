@@ -26,8 +26,8 @@ class ListMems: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        listSetup()
-        search()
+        getListMems()
+        settingSearchController()
     }
     
     // MARK: - Table view data source.
@@ -81,7 +81,7 @@ extension ListMems: UISearchResultsUpdating {
         tableView.reloadData()
     }
     
-    func search() {
+    func settingSearchController() {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Поиск по имени"
@@ -91,7 +91,7 @@ extension ListMems: UISearchResultsUpdating {
     
     // MARK: - Network Service. Load list memes.
     
-    func listSetup() {
+    func getListMems() {
         let urlListMems = "https://ronreiter-meme-generator.p.rapidapi.com/images"
         ListNetworkService.getList(url: urlListMems) { (response) in
             self.arrayMems = response.array
