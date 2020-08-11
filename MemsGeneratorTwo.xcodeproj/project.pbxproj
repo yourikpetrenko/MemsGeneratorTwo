@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E21BCB8724D9587500677187 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21BCB8624D9587500677187 /* NetworkService.swift */; };
+		E2706DED24E27F270030C1A6 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = E2706DEC24E27F270030C1A6 /* .gitignore */; };
 		E2A59F3324DD3474000D910F /* CurrentMemeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A59F3224DD3474000D910F /* CurrentMemeDelegate.swift */; };
 		E2DA813624C9BF51006D6CD3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DA813524C9BF51006D6CD3 /* AppDelegate.swift */; };
 		E2DA813824C9BF51006D6CD3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DA813724C9BF51006D6CD3 /* SceneDelegate.swift */; };
@@ -27,6 +28,7 @@
 		824DAD2B1202912B9EC76DCC /* Pods-MemsGeneratorTwo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemsGeneratorTwo.debug.xcconfig"; path = "Target Support Files/Pods-MemsGeneratorTwo/Pods-MemsGeneratorTwo.debug.xcconfig"; sourceTree = "<group>"; };
 		B77D441F32B65483B2F58AEF /* Pods_MemsGeneratorTwo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MemsGeneratorTwo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E21BCB8624D9587500677187 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		E2706DEC24E27F270030C1A6 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		E2A59F3224DD3474000D910F /* CurrentMemeDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentMemeDelegate.swift; sourceTree = "<group>"; };
 		E2DA813224C9BF51006D6CD3 /* MemsGeneratorTwo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemsGeneratorTwo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2DA813524C9BF51006D6CD3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 		E2DA812924C9BF51006D6CD3 = {
 			isa = PBXGroup;
 			children = (
+				E2706DEC24E27F270030C1A6 /* .gitignore */,
 				E2DA813424C9BF51006D6CD3 /* MemsGeneratorTwo */,
 				E2DA813324C9BF51006D6CD3 /* Products */,
 				7A13A53DD91C075E2F41FD6A /* Pods */,
@@ -212,6 +215,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2706DED24E27F270030C1A6 /* .gitignore in Resources */,
 				E2DA814224C9BF55006D6CD3 /* LaunchScreen.storyboard in Resources */,
 				E2DA813F24C9BF55006D6CD3 /* Assets.xcassets in Resources */,
 				E2DA813D24C9BF51006D6CD3 /* Main.storyboard in Resources */,
