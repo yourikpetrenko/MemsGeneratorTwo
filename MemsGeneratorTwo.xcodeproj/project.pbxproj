@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E21BCB8724D9587500677187 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21BCB8624D9587500677187 /* NetworkService.swift */; };
+		E25CE51824E3D33F00C32AF7 /* MainViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25CE51724E3D33F00C32AF7 /* MainViewPresenter.swift */; };
 		E2706DED24E27F270030C1A6 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = E2706DEC24E27F270030C1A6 /* .gitignore */; };
 		E2A59F3324DD3474000D910F /* CurrentMemeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A59F3224DD3474000D910F /* CurrentMemeDelegate.swift */; };
 		E2DA813624C9BF51006D6CD3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DA813524C9BF51006D6CD3 /* AppDelegate.swift */; };
@@ -28,6 +29,7 @@
 		824DAD2B1202912B9EC76DCC /* Pods-MemsGeneratorTwo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemsGeneratorTwo.debug.xcconfig"; path = "Target Support Files/Pods-MemsGeneratorTwo/Pods-MemsGeneratorTwo.debug.xcconfig"; sourceTree = "<group>"; };
 		B77D441F32B65483B2F58AEF /* Pods_MemsGeneratorTwo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MemsGeneratorTwo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E21BCB8624D9587500677187 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		E25CE51724E3D33F00C32AF7 /* MainViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewPresenter.swift; sourceTree = "<group>"; };
 		E2706DEC24E27F270030C1A6 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		E2A59F3224DD3474000D910F /* CurrentMemeDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentMemeDelegate.swift; sourceTree = "<group>"; };
 		E2DA813224C9BF51006D6CD3 /* MemsGeneratorTwo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemsGeneratorTwo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,21 +82,22 @@
 		E21BCB8224D953C900677187 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E2DA813524C9BF51006D6CD3 /* AppDelegate.swift */,
+				E2DA813924C9BF51006D6CD3 /* MainVC.swift */,
+				E2DA814924C9C17A006D6CD3 /* ListMems.swift */,
+				E2DA813724C9BF51006D6CD3 /* SceneDelegate.swift */,
 				E2DA813B24C9BF51006D6CD3 /* Main.storyboard */,
 				E2DA814024C9BF55006D6CD3 /* LaunchScreen.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
 		};
-		E21BCB8324D953CF00677187 /* Controller */ = {
+		E21BCB8324D953CF00677187 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				E2DA813524C9BF51006D6CD3 /* AppDelegate.swift */,
-				E2DA813724C9BF51006D6CD3 /* SceneDelegate.swift */,
-				E2DA813924C9BF51006D6CD3 /* MainVC.swift */,
-				E2DA814924C9C17A006D6CD3 /* ListMems.swift */,
+				E25CE51724E3D33F00C32AF7 /* MainViewPresenter.swift */,
 			);
-			path = Controller;
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		E21BCB8424D953E000677187 /* NetworkService */ = {
@@ -140,7 +143,7 @@
 			children = (
 				E21BCB8124D953C100677187 /* Model */,
 				E21BCB8224D953C900677187 /* View */,
-				E21BCB8324D953CF00677187 /* Controller */,
+				E21BCB8324D953CF00677187 /* Presenter */,
 				E21BCB8424D953E000677187 /* NetworkService */,
 				E21BCB8524D956F100677187 /* SupportingFiles */,
 			);
@@ -272,6 +275,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E21BCB8724D9587500677187 /* NetworkService.swift in Sources */,
+				E25CE51824E3D33F00C32AF7 /* MainViewPresenter.swift in Sources */,
 				E2DA813A24C9BF51006D6CD3 /* MainVC.swift in Sources */,
 				E2E5300124DEE0D8004E7E5B /* ListNetworkService.swift in Sources */,
 				E2DA813624C9BF51006D6CD3 /* AppDelegate.swift in Sources */,
