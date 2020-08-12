@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		E21BCB8724D9587500677187 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21BCB8624D9587500677187 /* NetworkService.swift */; };
-		E25CE51824E3D33F00C32AF7 /* MainViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25CE51724E3D33F00C32AF7 /* MainViewPresenter.swift */; };
 		E2706DED24E27F270030C1A6 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = E2706DEC24E27F270030C1A6 /* .gitignore */; };
 		E2A59F3324DD3474000D910F /* CurrentMemeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A59F3224DD3474000D910F /* CurrentMemeDelegate.swift */; };
 		E2DA813624C9BF51006D6CD3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DA813524C9BF51006D6CD3 /* AppDelegate.swift */; };
@@ -22,6 +21,9 @@
 		E2E5300124DEE0D8004E7E5B /* ListNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E5300024DEE0D8004E7E5B /* ListNetworkService.swift */; };
 		E2E5300524DEF05A004E7E5B /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E5300424DEF05A004E7E5B /* ImageModel.swift */; };
 		E2E5300724DEF0A6004E7E5B /* ImageNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E5300624DEF0A6004E7E5B /* ImageNetworkService.swift */; };
+		E2E9F77524E40ED300B365FA /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E9F77424E40ED300B365FA /* MainModel.swift */; };
+		E2E9F77724E412A000B365FA /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E9F77624E412A000B365FA /* MainPresenter.swift */; };
+		E2E9F77D24E41A5000B365FA /* ListMemosPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E9F77C24E41A5000B365FA /* ListMemosPresenter.swift */; };
 		FEC0E1BF959AFE28FA3A4F28 /* Pods_MemsGeneratorTwo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77D441F32B65483B2F58AEF /* Pods_MemsGeneratorTwo.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,7 +31,6 @@
 		824DAD2B1202912B9EC76DCC /* Pods-MemsGeneratorTwo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemsGeneratorTwo.debug.xcconfig"; path = "Target Support Files/Pods-MemsGeneratorTwo/Pods-MemsGeneratorTwo.debug.xcconfig"; sourceTree = "<group>"; };
 		B77D441F32B65483B2F58AEF /* Pods_MemsGeneratorTwo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MemsGeneratorTwo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E21BCB8624D9587500677187 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
-		E25CE51724E3D33F00C32AF7 /* MainViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewPresenter.swift; sourceTree = "<group>"; };
 		E2706DEC24E27F270030C1A6 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		E2A59F3224DD3474000D910F /* CurrentMemeDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentMemeDelegate.swift; sourceTree = "<group>"; };
 		E2DA813224C9BF51006D6CD3 /* MemsGeneratorTwo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemsGeneratorTwo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -45,6 +46,9 @@
 		E2E5300024DEE0D8004E7E5B /* ListNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListNetworkService.swift; sourceTree = "<group>"; };
 		E2E5300424DEF05A004E7E5B /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
 		E2E5300624DEF0A6004E7E5B /* ImageNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageNetworkService.swift; sourceTree = "<group>"; };
+		E2E9F77424E40ED300B365FA /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
+		E2E9F77624E412A000B365FA /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
+		E2E9F77C24E41A5000B365FA /* ListMemosPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMemosPresenter.swift; sourceTree = "<group>"; };
 		F18E78BA51E0328478D76F9E /* Pods-MemsGeneratorTwo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemsGeneratorTwo.release.xcconfig"; path = "Target Support Files/Pods-MemsGeneratorTwo/Pods-MemsGeneratorTwo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -67,37 +71,6 @@
 				F18E78BA51E0328478D76F9E /* Pods-MemsGeneratorTwo.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		E21BCB8124D953C100677187 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				E2A59F3224DD3474000D910F /* CurrentMemeDelegate.swift */,
-				E2E52FFE24DED8CD004E7E5B /* ListModel.swift */,
-				E2E5300424DEF05A004E7E5B /* ImageModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		E21BCB8224D953C900677187 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				E2DA813524C9BF51006D6CD3 /* AppDelegate.swift */,
-				E2DA813924C9BF51006D6CD3 /* MainVC.swift */,
-				E2DA814924C9C17A006D6CD3 /* ListMems.swift */,
-				E2DA813724C9BF51006D6CD3 /* SceneDelegate.swift */,
-				E2DA813B24C9BF51006D6CD3 /* Main.storyboard */,
-				E2DA814024C9BF55006D6CD3 /* LaunchScreen.storyboard */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		E21BCB8324D953CF00677187 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-				E25CE51724E3D33F00C32AF7 /* MainViewPresenter.swift */,
-			);
-			path = Presenter;
 			sourceTree = "<group>";
 		};
 		E21BCB8424D953E000677187 /* NetworkService */ = {
@@ -141,13 +114,86 @@
 		E2DA813424C9BF51006D6CD3 /* MemsGeneratorTwo */ = {
 			isa = PBXGroup;
 			children = (
-				E21BCB8124D953C100677187 /* Model */,
-				E21BCB8224D953C900677187 /* View */,
-				E21BCB8324D953CF00677187 /* Presenter */,
+				E2DA813524C9BF51006D6CD3 /* AppDelegate.swift */,
+				E2DA813724C9BF51006D6CD3 /* SceneDelegate.swift */,
+				E2DA813B24C9BF51006D6CD3 /* Main.storyboard */,
+				E2DA814024C9BF55006D6CD3 /* LaunchScreen.storyboard */,
+				E2A59F3224DD3474000D910F /* CurrentMemeDelegate.swift */,
+				E2E9F77024E40E7500B365FA /* MainModule */,
+				E2E9F77824E418A000B365FA /* ListMemosModule */,
 				E21BCB8424D953E000677187 /* NetworkService */,
 				E21BCB8524D956F100677187 /* SupportingFiles */,
 			);
 			path = MemsGeneratorTwo;
+			sourceTree = "<group>";
+		};
+		E2E9F77024E40E7500B365FA /* MainModule */ = {
+			isa = PBXGroup;
+			children = (
+				E2E9F77124E40E8700B365FA /* Model */,
+				E2E9F77224E40E9A00B365FA /* View */,
+				E2E9F77324E40EA300B365FA /* Presenter */,
+			);
+			path = MainModule;
+			sourceTree = "<group>";
+		};
+		E2E9F77124E40E8700B365FA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E2E5300424DEF05A004E7E5B /* ImageModel.swift */,
+				E2E9F77424E40ED300B365FA /* MainModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E2E9F77224E40E9A00B365FA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E2DA813924C9BF51006D6CD3 /* MainVC.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E2E9F77324E40EA300B365FA /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				E2E9F77624E412A000B365FA /* MainPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		E2E9F77824E418A000B365FA /* ListMemosModule */ = {
+			isa = PBXGroup;
+			children = (
+				E2E9F77924E418CF00B365FA /* Model */,
+				E2E9F77A24E418DD00B365FA /* View */,
+				E2E9F77B24E418E400B365FA /* Presenter */,
+			);
+			path = ListMemosModule;
+			sourceTree = "<group>";
+		};
+		E2E9F77924E418CF00B365FA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E2E52FFE24DED8CD004E7E5B /* ListModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E2E9F77A24E418DD00B365FA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E2DA814924C9C17A006D6CD3 /* ListMems.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E2E9F77B24E418E400B365FA /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				E2E9F77C24E41A5000B365FA /* ListMemosPresenter.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		FA231E153F34FFD73045138D /* Frameworks */ = {
@@ -275,13 +321,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				E21BCB8724D9587500677187 /* NetworkService.swift in Sources */,
-				E25CE51824E3D33F00C32AF7 /* MainViewPresenter.swift in Sources */,
 				E2DA813A24C9BF51006D6CD3 /* MainVC.swift in Sources */,
 				E2E5300124DEE0D8004E7E5B /* ListNetworkService.swift in Sources */,
+				E2E9F77D24E41A5000B365FA /* ListMemosPresenter.swift in Sources */,
 				E2DA813624C9BF51006D6CD3 /* AppDelegate.swift in Sources */,
 				E2E5300724DEF0A6004E7E5B /* ImageNetworkService.swift in Sources */,
 				E2E5300524DEF05A004E7E5B /* ImageModel.swift in Sources */,
 				E2E52FFF24DED8CD004E7E5B /* ListModel.swift in Sources */,
+				E2E9F77724E412A000B365FA /* MainPresenter.swift in Sources */,
+				E2E9F77524E40ED300B365FA /* MainModel.swift in Sources */,
 				E2DA813824C9BF51006D6CD3 /* SceneDelegate.swift in Sources */,
 				E2DA814A24C9C17A006D6CD3 /* ListMems.swift in Sources */,
 				E2A59F3324DD3474000D910F /* CurrentMemeDelegate.swift in Sources */,

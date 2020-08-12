@@ -9,7 +9,12 @@
 import Foundation
 import Alamofire
 
-class NetworkService {
+protocol NetworkServiceProtocol {
+    func downloadList(urlString: String, completion: @escaping ([String]) -> Void)
+    func downloadImage(urlString: String, completion: @escaping (Data) -> Void)
+}
+
+class NetworkService: NetworkServiceProtocol {
     private init() {}
     static let shared = NetworkService()
     

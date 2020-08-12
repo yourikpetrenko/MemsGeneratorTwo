@@ -28,8 +28,6 @@ class MainVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         fontLoad()
-        textFieldTopOutlet.delegate = self
-        textFieldBottomOutlet.delegate = self
         createPickerView()
         createToolBar()
         registerForKeyboardNotifications()
@@ -225,5 +223,4 @@ extension MainVC: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDeleg
              self.view.frame.origin.y = 0
          }
      }
-
 }

@@ -133,7 +133,6 @@
                     <connections>
                         <outlet property="activityIndicator" destination="Wf4-T8-luU" id="F10-vV-we5"/>
                         <outlet property="imageOutlet" destination="gl9-Ih-Reh" id="4Rc-PR-AUO"/>
-                        <outlet property="scrollView" destination="Csr-Et-car" id="lic-72-vVm"/>
                         <outlet property="textFieldBottomOutlet" destination="VOG-Hf-PrF" id="LOV-V0-3XB"/>
                         <outlet property="textFieldFontOutlet" destination="Cgp-po-XID" id="hFU-7q-Q3r"/>
                         <outlet property="textFieldTopOutlet" destination="zlO-GL-9m8" id="u9o-QF-EZa"/>

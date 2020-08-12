@@ -1,5 +1,5 @@
 //
-//  MainViewPresenter.swift
+//  MainPresenter.swift
 //  MemsGeneratorTwo
 //
 //  Created by Jura on 12.08.2020.
@@ -8,9 +8,4 @@
 
 import Foundation
 
-class MainViewPresenter {
-    
-    init() {
-        
-    }
-}
+

@@ -11,6 +11,7 @@ import Alamofire
 
 class ListMems: UITableViewController {
     
+    var presenter: ListViewPresenerProtocol!
     var delegate: CurrentMemeDelegate?
     private var arrayMems = [String]()
     private var textIndexPath: String?
@@ -26,7 +27,7 @@ class ListMems: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        listSetup()
+//        listSetup()
         search()
     }
     
@@ -36,16 +37,17 @@ class ListMems: UITableViewController {
         if isFiltering {
             return filteredMems.count
         }
-        return arrayMems.count
+        return presenter.mems?.array.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         var memos: String
+        let memesFromNetwork = presenter.mems?.array ?? []
         if isFiltering {
             memos = filteredMems[indexPath.row]
         } else {
-            memos = arrayMems[indexPath.row]
+            memos = memesFromNetwork[indexPath.row]
         }
         cell.textLabel?.text = memos
         self.textIndexPath = memos
@@ -90,12 +92,12 @@ extension ListMems: UISearchResultsUpdating {
     }
     
     // MARK: - Network Service. Load list memes.
-    
-    func listSetup() {
-        let urlListMems = "https://ronreiter-meme-generator.p.rapidapi.com/images"
-        ListNetworkService.getList(url: urlListMems) { (response) in
-            self.arrayMems = response.array
-            self.tableView.reloadData()
-        }
-    }
+//    
+//    func listSetup() {
+//        let urlListMems = "https://ronreiter-meme-generator.p.rapidapi.com/images"
+//        ListNetworkService.getList(url: urlListMems) { (response) in
+//            self.arrayMems = response.array
+//            self.tableView.reloadData()
+//        }
+//    }
 }
