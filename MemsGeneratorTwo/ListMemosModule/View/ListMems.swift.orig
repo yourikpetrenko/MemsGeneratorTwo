@@ -27,8 +27,13 @@ class ListMems: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+<<<<<<< HEAD:MemsGeneratorTwo/ListMemosModule/View/ListMems.swift
 //        listSetup()
-//        search()
+        search()
+=======
+        getListMems()
+        settingSearchController()
+>>>>>>> 755897e0b4a2d6605b70573ced028e0f2c2378aa:MemsGeneratorTwo/Controller/ListMems.swift
     }
     
     // MARK: - Table view data source.
@@ -92,6 +97,7 @@ extension ListMems: UISearchResultsUpdating {
     }
     
     // MARK: - Network Service. Load list memes.
+<<<<<<< HEAD:MemsGeneratorTwo/ListMemosModule/View/ListMems.swift
 //    
 //    func listSetup() {
 //        let urlListMems = "https://ronreiter-meme-generator.p.rapidapi.com/images"
@@ -100,4 +106,14 @@ extension ListMems: UISearchResultsUpdating {
 //            self.tableView.reloadData()
 //        }
 //    }
+=======
+    
+    func getListMems() {
+        let urlListMems = "https://ronreiter-meme-generator.p.rapidapi.com/images"
+        ListNetworkService.getList(url: urlListMems) { (response) in
+            self.arrayMems = response.array
+            self.tableView.reloadData()
+        }
+    }
+>>>>>>> 755897e0b4a2d6605b70573ced028e0f2c2378aa:MemsGeneratorTwo/Controller/ListMems.swift
 }

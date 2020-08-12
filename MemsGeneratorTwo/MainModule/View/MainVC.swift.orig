@@ -27,9 +27,13 @@ class MainVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+<<<<<<< HEAD:MemsGeneratorTwo/MainModule/View/MainVC.swift
+        fontLoad()
+=======
         loadingFonts()
         textFieldTopOutlet.delegate = self
         textFieldBottomOutlet.delegate = self
+>>>>>>> 755897e0b4a2d6605b70573ced028e0f2c2378aa:MemsGeneratorTwo/Controller/MainVC.swift
         createPickerView()
         createToolBar()
         registerForKeyboardNotifications()
