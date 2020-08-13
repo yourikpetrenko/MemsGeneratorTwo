@@ -11,7 +11,7 @@ import Foundation
 // MARK: - Model for loading lists
 
 struct ListModel {
-    let array: [String]
+    var array: [String]
     init(json: [String]) {
         self.array = json
     }

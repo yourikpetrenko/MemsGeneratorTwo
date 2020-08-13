@@ -13,7 +13,7 @@ class ListMems: UITableViewController {
     
     var presenter: ListViewPresenerProtocol!
     var delegate: CurrentMemeDelegate?
-    private var arrayMems = [String]()
+//    private var arrayMems = [String]()
     private var textIndexPath: String?
     private var filteredMems = [String]()
     private var searchBarIsEmpty: Bool {
@@ -28,7 +28,7 @@ class ListMems: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        listSetup()
-//        search()
+        settingSearchController()
     }
     
     // MARK: - Table view data source.
@@ -56,11 +56,12 @@ class ListMems: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var mems = ""
+        let memesFromNetwork = presenter.mems?.array ?? []
         if let indexPath = tableView.indexPathForSelectedRow {
             if isFiltering {
                 mems = filteredMems[indexPath.row]
             } else {
-                mems = arrayMems[indexPath.row]
+                mems = memesFromNetwork[indexPath.row]
             }
         }
         let id = mems
@@ -77,7 +78,9 @@ extension ListMems: UISearchResultsUpdating {
     }
     
     func filterForSearchText(_ searchText: String) {
-        filteredMems = arrayMems.filter({ (mems: String) -> Bool in
+        let memesFromNetwork = presenter.mems?.array ?? []
+
+        filteredMems = memesFromNetwork.filter({ (mems: String) -> Bool in
             return mems.lowercased().contains(searchText.lowercased())
         })
         tableView.reloadData()
@@ -101,3 +104,14 @@ extension ListMems: UISearchResultsUpdating {
 //        }
 //    }
 }
+
+extension ListMems: ListViewProtocol {
+    func failure(error: Error) {
+        print(error.localizedDescription)
+    }
+    
+    func secces() {
+        tableView.reloadData()
+    }
+}
+

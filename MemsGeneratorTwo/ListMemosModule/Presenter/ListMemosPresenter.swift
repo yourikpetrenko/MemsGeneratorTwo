@@ -10,6 +10,7 @@ import Foundation
 
 protocol ListViewProtocol: class {
     func secces()
+    func failure(error: Error)
 }
 
 protocol ListViewPresenerProtocol: class {
@@ -28,12 +29,17 @@ class ListPresenter: ListViewPresenerProtocol {
         self.view = view
         self.networkService = networkService
         getMems()
+        print(self.mems)
+        print("SRABOTALO")
     }
     
     func getMems() {
         networkService.downloadList(urlString: urlListMems) { [weak self] json in
+            guard let self = self else { return }
             DispatchQueue.main.async {
-                self?.mems = ListModel(json: json)
+                let response = ListModel(json: json)
+                self.mems = response
+                
             }
         }
     }

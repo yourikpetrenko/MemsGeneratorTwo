@@ -11,6 +11,7 @@ import Alamofire
 
 class MainVC: UIViewController {
     
+    var presenter: MainViewPresenterProtocol!
     private var arrayFont = [String]()
     private var selectedFont: String?
     private var imageData: UIImage?
@@ -33,6 +34,7 @@ class MainVC: UIViewController {
         createPickerView()
         createToolBar()
         registerForKeyboardNotifications()
+        presenter.generateMem()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -227,4 +229,9 @@ extension MainVC: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDeleg
              self.view.frame.origin.y = 0
          }
      }
+}
+extension MainVC: MainViewProtocol {
+    func selectedMem(currnetMem: String?) {
+        self.currentMem = currnetMem ?? ""
+    }
 }
