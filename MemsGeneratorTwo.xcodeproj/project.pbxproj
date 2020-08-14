@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		E21BCB8724D9587500677187 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21BCB8624D9587500677187 /* NetworkService.swift */; };
 		E2706DED24E27F270030C1A6 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = E2706DEC24E27F270030C1A6 /* .gitignore */; };
+		E2A0711024E67FA800E11A8C /* FontsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A0710F24E67FA800E11A8C /* FontsModel.swift */; };
 		E2A1475024E52D5F00656D39 /* ModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A1474F24E52D5F00656D39 /* ModuleBuilder.swift */; };
 		E2A59F3324DD3474000D910F /* CurrentMemeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A59F3224DD3474000D910F /* CurrentMemeDelegate.swift */; };
 		E2DA813624C9BF51006D6CD3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DA813524C9BF51006D6CD3 /* AppDelegate.swift */; };
@@ -22,7 +23,6 @@
 		E2E5300124DEE0D8004E7E5B /* ListNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E5300024DEE0D8004E7E5B /* ListNetworkService.swift */; };
 		E2E5300524DEF05A004E7E5B /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E5300424DEF05A004E7E5B /* ImageModel.swift */; };
 		E2E5300724DEF0A6004E7E5B /* ImageNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E5300624DEF0A6004E7E5B /* ImageNetworkService.swift */; };
-		E2E9F77524E40ED300B365FA /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E9F77424E40ED300B365FA /* MainModel.swift */; };
 		E2E9F77724E412A000B365FA /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E9F77624E412A000B365FA /* MainPresenter.swift */; };
 		E2E9F77D24E41A5000B365FA /* ListMemosPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E9F77C24E41A5000B365FA /* ListMemosPresenter.swift */; };
 		FEC0E1BF959AFE28FA3A4F28 /* Pods_MemsGeneratorTwo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77D441F32B65483B2F58AEF /* Pods_MemsGeneratorTwo.framework */; };
@@ -33,6 +33,7 @@
 		B77D441F32B65483B2F58AEF /* Pods_MemsGeneratorTwo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MemsGeneratorTwo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E21BCB8624D9587500677187 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		E2706DEC24E27F270030C1A6 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		E2A0710F24E67FA800E11A8C /* FontsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsModel.swift; sourceTree = "<group>"; };
 		E2A1474F24E52D5F00656D39 /* ModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleBuilder.swift; sourceTree = "<group>"; };
 		E2A59F3224DD3474000D910F /* CurrentMemeDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentMemeDelegate.swift; sourceTree = "<group>"; };
 		E2DA813224C9BF51006D6CD3 /* MemsGeneratorTwo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemsGeneratorTwo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,7 +49,6 @@
 		E2E5300024DEE0D8004E7E5B /* ListNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListNetworkService.swift; sourceTree = "<group>"; };
 		E2E5300424DEF05A004E7E5B /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
 		E2E5300624DEF0A6004E7E5B /* ImageNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageNetworkService.swift; sourceTree = "<group>"; };
-		E2E9F77424E40ED300B365FA /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
 		E2E9F77624E412A000B365FA /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
 		E2E9F77C24E41A5000B365FA /* ListMemosPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMemosPresenter.swift; sourceTree = "<group>"; };
 		F18E78BA51E0328478D76F9E /* Pods-MemsGeneratorTwo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemsGeneratorTwo.release.xcconfig"; path = "Target Support Files/Pods-MemsGeneratorTwo/Pods-MemsGeneratorTwo.release.xcconfig"; sourceTree = "<group>"; };
@@ -144,7 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				E2E5300424DEF05A004E7E5B /* ImageModel.swift */,
-				E2E9F77424E40ED300B365FA /* MainModel.swift */,
+				E2A0710F24E67FA800E11A8C /* FontsModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -327,12 +327,12 @@
 				E2DA813A24C9BF51006D6CD3 /* MainVC.swift in Sources */,
 				E2E5300124DEE0D8004E7E5B /* ListNetworkService.swift in Sources */,
 				E2E9F77D24E41A5000B365FA /* ListMemosPresenter.swift in Sources */,
+				E2A0711024E67FA800E11A8C /* FontsModel.swift in Sources */,
 				E2DA813624C9BF51006D6CD3 /* AppDelegate.swift in Sources */,
 				E2E5300724DEF0A6004E7E5B /* ImageNetworkService.swift in Sources */,
 				E2E5300524DEF05A004E7E5B /* ImageModel.swift in Sources */,
 				E2E52FFF24DED8CD004E7E5B /* ListModel.swift in Sources */,
 				E2E9F77724E412A000B365FA /* MainPresenter.swift in Sources */,
-				E2E9F77524E40ED300B365FA /* MainModel.swift in Sources */,
 				E2DA813824C9BF51006D6CD3 /* SceneDelegate.swift in Sources */,
 				E2A1475024E52D5F00656D39 /* ModuleBuilder.swift in Sources */,
 				E2DA814A24C9C17A006D6CD3 /* ListMems.swift in Sources */,

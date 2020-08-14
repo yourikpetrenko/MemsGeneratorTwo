@@ -9,25 +9,17 @@
 import UIKit
 
 protocol Builder {
-    static func createMainModule(currentMem: String?) -> UIViewController
-    static func createListModule() -> UIViewController
+     func createMainModule() -> UIViewController
 }
 
 class ModelBuilder: Builder {
-    static func createMainModule(currentMem: String?) -> UIViewController {
-        let view = MainVC()
+     func createMainModule() -> UIViewController {
+        
+        let mainVC = MainVC()
+        let navigationController = UINavigationController(rootViewController: mainVC)
         let networkService = NetworkService()
-        let presenter = MainPresenter(view: view, networkService: networkService, currentMem: currentMem)
-        view.presenter = presenter
-        return view
+        let presenter = MainPresenter(with: mainVC, networkService: networkService)
+        mainVC.presenter = presenter
+        return navigationController
     }
-    
-    static func createListModule() -> UIViewController {
-        let view = ListMems()
-        let networkService = NetworkService()
-        let presenter = ListPresenter(view: view, networkService: networkService)
-        view.presenter = presenter
-        return view
-    }
-    
 }

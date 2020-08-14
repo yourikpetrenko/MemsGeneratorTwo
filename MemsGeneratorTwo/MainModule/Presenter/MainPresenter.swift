@@ -9,28 +9,35 @@
 import Foundation
 
 protocol MainViewProtocol: class {
-    func selectedMem(currnetMem: String?)
+    func updateList()
 }
 
-protocol MainViewPresenterProtocol: class {
-    init(view: MainViewProtocol, networkService: NetworkServiceProtocol, currentMem: String?)
-    func generateMem()
+protocol MainViewPresenterProtocol {
+    init(with view: MainViewProtocol, networkService: NetworkServiceProtocol)
+    func getList()
+    var arrayFonts: [String]? { get set }
 }
 
 class MainPresenter: MainViewPresenterProtocol {
     weak var view: MainViewProtocol?
     let networkService: NetworkServiceProtocol!
-    var currentMem: String?
+    var arrayFonts: [String]?
+    let urlFonts = "https://ronreiter-meme-generator.p.rapidapi.com/fonts"
     
-    required init(view: MainViewProtocol, networkService: NetworkServiceProtocol, currentMem: String?) {
+    required init(with view: MainViewProtocol, networkService: NetworkServiceProtocol) {
+        print("SRABOTALO")
         self.view = view
         self.networkService = networkService
-        self.currentMem = currentMem
+//        self.getList()
     }
     
-   public func generateMem() {
-    self.view?.selectedMem(currnetMem: currentMem)
+    func getList() {
+        networkService.downloadList(urlString: urlFonts) { [weak self] json in
+            DispatchQueue.main.async {
+                self?.arrayFonts = json
+                print(json)
+            }
+        }
     }
-    
-    
 }
+

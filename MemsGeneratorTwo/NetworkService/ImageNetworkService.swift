@@ -14,11 +14,11 @@ class ImageNetworkService {
     // MARK: - Network Service. Methods for loading image.
 
     static func getList(url: String, completion: @escaping(ImageModel) -> ()) {
-//        NetworkService.shared.downloadImage(urlString: url) { (response) in
-//            do {
-//                let response = ImageModel(json: response)
-//                completion(response)
-//            }
-//        }
+        NetworkService.shared.downloadImage(urlString: url) { (response) in
+            do {
+                let response = ImageModel(json: response)
+                completion(response)
+            }
+        }
     }
 }

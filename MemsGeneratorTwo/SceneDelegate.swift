@@ -11,15 +11,15 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    var builder: ModelBuilder!
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession,
                options connectionOptions: UIScene.ConnectionOptions) {
-        guard let windowScene = (scene as? UIWindowScene) else { return }
-        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
-        window?.windowScene = windowScene
-        let listVC = ModelBuilder.createListModule()
-        let navBar = UINavigationController(rootViewController: listVC)
-        window?.rootViewController = navBar
+        guard let windowsScane = (scene as? UIWindowScene) else { return }
+        self.builder = ModelBuilder()
+
+        window = UIWindow(frame: windowsScane.coordinateSpace.bounds)
+        window?.windowScene = windowsScane
         window?.makeKeyAndVisible()
     }
 

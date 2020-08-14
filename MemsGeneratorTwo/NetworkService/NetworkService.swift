@@ -15,11 +15,10 @@ protocol NetworkServiceProtocol {
 }
 
 class NetworkService: NetworkServiceProtocol {
-//    init() {}
-//    static let shared = NetworkService()
+//    private init() {}
+    static let shared = NetworkService()
     
     // MARK: - Basic methods for working with the network
-
     func downloadList(urlString: String, completion: @escaping ([String]) -> Void) {
         let headers: HTTPHeaders = [
             "x-rapidapi-host": "ronreiter-meme-generator.p.rapidapi.com",
@@ -27,7 +26,7 @@ class NetworkService: NetworkServiceProtocol {
         guard let url = URL(string: urlString) else { return }
         AF.request(url, method: .get, headers: headers).responseJSON { (response) in
             guard let data = response.data else { return }
-            do { 
+            do {
                 let array = try JSONSerialization.jsonObject(with: data, options: []) as? [String]
                 DispatchQueue.main.async {
                     completion(array ?? [])
