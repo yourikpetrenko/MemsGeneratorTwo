@@ -10,7 +10,7 @@ import Foundation
 
 struct FontsModel {
     var array: [String]
-    init(json: [String]) {
-        self.array = json
-    }
+//    init(json: [String]) {
+//        self.array = json
+//    }
 }

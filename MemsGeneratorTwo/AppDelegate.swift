@@ -10,8 +10,17 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    var window: UIWindow?
+    var builder: ModelBuilder!
+
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        self.window = UIWindow()
+        self.builder = ModelBuilder()
+
+        let rootVC = builder.createMainModule()
+        window?.rootViewController = rootVC
+        window?.makeKeyAndVisible()
         return true
     }
     // MARK: UISceneSession Lifecycle

@@ -9,37 +9,37 @@
 import Foundation
 
 protocol ListViewProtocol: class {
-    func secces()
-    func failure(error: Error)
+    func updateList(arrayMems: [String])
 }
 
 protocol ListViewPresenerProtocol: class {
     init(view: ListViewProtocol, networkService: NetworkServiceProtocol)
-    func getMems()
-    var mems: ListModel? {get set}
+    func getMems(completion: @escaping(ListModel) -> Void)
+    var listMems: [String] {get set}
 }
 
 class ListPresenter: ListViewPresenerProtocol {
     weak var view: ListViewProtocol?
     let networkService: NetworkServiceProtocol!
-    var mems: ListModel?
+    var listMems = [String]()
     let urlListMems = "https://ronreiter-meme-generator.p.rapidapi.com/images"
-    
+
     required init(view: ListViewProtocol, networkService: NetworkServiceProtocol) {
         self.view = view
         self.networkService = networkService
-        getMems()
-        print(self.mems)
-        print("SRABOTALO")
+        getMems { (json) in
+            self.listMems = json.array
+            self.view?.updateList(arrayMems: self.listMems)
+        }
+        print("SRABOTALO list")
+        
     }
-    
-    func getMems() {
-        networkService.downloadList(urlString: urlListMems) { [weak self] json in
-            guard let self = self else { return }
+
+    func getMems(completion: @escaping(ListModel) -> Void) {
+        networkService.downloadList(urlString: urlListMems) { json in
             DispatchQueue.main.async {
                 let response = ListModel(json: json)
-                self.mems = response
-                
+                completion(response)
             }
         }
     }

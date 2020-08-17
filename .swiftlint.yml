@@ -1,0 +1,13 @@
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+- Carthage
+- Pods
+disabled_rules: # rule identifiers to exclude from running
+- trailing_whitespace
+- identifier_name
+- vertical_parameter_alignment
+- type_body_length
+- function_parameter_count
+force_cast: warning # implicitly
+line_length: 510
+file_length:
+  warning: 500

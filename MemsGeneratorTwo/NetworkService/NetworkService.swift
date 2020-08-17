@@ -16,8 +16,8 @@ protocol NetworkServiceProtocol {
 
 class NetworkService: NetworkServiceProtocol {
 //    private init() {}
-    static let shared = NetworkService()
-    
+//    static let shared = NetworkService()
+
     // MARK: - Basic methods for working with the network
     func downloadList(urlString: String, completion: @escaping ([String]) -> Void) {
         let headers: HTTPHeaders = [
@@ -36,7 +36,7 @@ class NetworkService: NetworkServiceProtocol {
             }
         }
     }
-    
+
     func downloadImage(urlString: String, completion: @escaping (Data) -> Void) {
         let headers: HTTPHeaders = [
             "x-rapidapi-host": "ronreiter-meme-generator.p.rapidapi.com",

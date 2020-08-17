@@ -8,17 +8,17 @@
 
 import Foundation
 
-class ListNetworkService {
-    private init() {}
-    
-//     MARK: - Network Service. Methods for loading list.
-    
-    static func getList(url: String, completion: @escaping(ListModel) -> ()) {
-        NetworkService.shared.downloadList(urlString: url) { (json) in
-            do {
-                let response = ListModel(json: json)
-                completion(response)
-            }
-        }
-    }
-}
+//class ListNetworkService {
+//    private init() {}
+//
+//    // MARK: - Network Service. Methods for loading list.
+//
+//    static func getList(url: String, completion: @escaping(ListModel) -> Void) {
+//        NetworkService.shared.downloadList(urlString: url) { (json) in
+//            do {
+//                let response = ListModel(json: json)
+//                completion(response)
+//            }
+//        }
+//    }
+//}

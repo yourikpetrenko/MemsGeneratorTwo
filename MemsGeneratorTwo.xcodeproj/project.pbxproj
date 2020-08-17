@@ -18,7 +18,7 @@
 		E2DA813D24C9BF51006D6CD3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2DA813B24C9BF51006D6CD3 /* Main.storyboard */; };
 		E2DA813F24C9BF55006D6CD3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2DA813E24C9BF55006D6CD3 /* Assets.xcassets */; };
 		E2DA814224C9BF55006D6CD3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2DA814024C9BF55006D6CD3 /* LaunchScreen.storyboard */; };
-		E2DA814A24C9C17A006D6CD3 /* ListMems.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DA814924C9C17A006D6CD3 /* ListMems.swift */; };
+		E2DA814A24C9C17A006D6CD3 /* ListMemsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DA814924C9C17A006D6CD3 /* ListMemsVC.swift */; };
 		E2E52FFF24DED8CD004E7E5B /* ListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E52FFE24DED8CD004E7E5B /* ListModel.swift */; };
 		E2E5300124DEE0D8004E7E5B /* ListNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E5300024DEE0D8004E7E5B /* ListNetworkService.swift */; };
 		E2E5300524DEF05A004E7E5B /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E5300424DEF05A004E7E5B /* ImageModel.swift */; };
@@ -44,7 +44,7 @@
 		E2DA813E24C9BF55006D6CD3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E2DA814124C9BF55006D6CD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E2DA814324C9BF55006D6CD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E2DA814924C9C17A006D6CD3 /* ListMems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMems.swift; sourceTree = "<group>"; };
+		E2DA814924C9C17A006D6CD3 /* ListMemsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMemsVC.swift; sourceTree = "<group>"; };
 		E2E52FFE24DED8CD004E7E5B /* ListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModel.swift; sourceTree = "<group>"; };
 		E2E5300024DEE0D8004E7E5B /* ListNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListNetworkService.swift; sourceTree = "<group>"; };
 		E2E5300424DEF05A004E7E5B /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
@@ -186,7 +186,7 @@
 		E2E9F77A24E418DD00B365FA /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E2DA814924C9C17A006D6CD3 /* ListMems.swift */,
+				E2DA814924C9C17A006D6CD3 /* ListMemsVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -214,6 +214,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E2DA814624C9BF55006D6CD3 /* Build configuration list for PBXNativeTarget "MemsGeneratorTwo" */;
 			buildPhases = (
+				E24DFC6F24EA589E001290AF /* ShellScript */,
 				936A66F5AA3EEF66743C7989 /* [CP] Check Pods Manifest.lock */,
 				E2DA812E24C9BF51006D6CD3 /* Sources */,
 				E2DA812F24C9BF51006D6CD3 /* Frameworks */,
@@ -316,6 +317,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MemsGeneratorTwo/Pods-MemsGeneratorTwo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		E24DFC6F24EA589E001290AF /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -335,7 +353,7 @@
 				E2E9F77724E412A000B365FA /* MainPresenter.swift in Sources */,
 				E2DA813824C9BF51006D6CD3 /* SceneDelegate.swift in Sources */,
 				E2A1475024E52D5F00656D39 /* ModuleBuilder.swift in Sources */,
-				E2DA814A24C9C17A006D6CD3 /* ListMems.swift in Sources */,
+				E2DA814A24C9C17A006D6CD3 /* ListMemsVC.swift in Sources */,
 				E2A59F3324DD3474000D910F /* CurrentMemeDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

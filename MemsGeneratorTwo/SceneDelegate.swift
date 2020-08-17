@@ -11,16 +11,11 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    var builder: ModelBuilder!
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession,
                options connectionOptions: UIScene.ConnectionOptions) {
-        guard let windowsScane = (scene as? UIWindowScene) else { return }
-        self.builder = ModelBuilder()
+        guard let _ = (scene as? UIWindowScene) else { return }
 
-        window = UIWindow(frame: windowsScane.coordinateSpace.bounds)
-        window?.windowScene = windowsScane
-        window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -8,17 +8,16 @@
 
 import Foundation
 
-class ImageNetworkService {
-    private init() {}
-    
-    // MARK: - Network Service. Methods for loading image.
-
-    static func getList(url: String, completion: @escaping(ImageModel) -> ()) {
-        NetworkService.shared.downloadImage(urlString: url) { (response) in
-            do {
-                let response = ImageModel(json: response)
-                completion(response)
-            }
-        }
-    }
-}
+//class ImageNetworkService {
+//    private init() {}
+//    // MARK: - Network Service. Methods for loading image.
+//
+//    static func getList(url: String, completion: @escaping(ImageModel) -> Void) {
+//        NetworkService.shared.downloadImage(urlString: url) { (response) in
+//            do {
+//                let response = ImageModel(json: response)
+//                completion(response)
+//            }
+//        }
+//    }
+//}
