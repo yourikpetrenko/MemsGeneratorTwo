@@ -10,14 +10,13 @@ import UIKit
 
 protocol MainViewProtocol: class {
     func updateList()
-    func uploadImage()
+    func uploadImage(imageData: Data)
 }
 
 protocol MainViewPresenterProtocol {
     init(with view: MainViewProtocol, networkService: NetworkServiceProtocol)
     func getFonts(completion: @escaping(ListModel) -> Void)
-    func loadingSelectedImage(urlImage: String, completion: @escaping(ImageModel) -> Void)
-    
+    func loadingSelectedImage(completion: @escaping(ImageModel) -> Void)
     var arrayFonts: [String] { get set }
     var urlTop: String? { get set }
     var urlBottom: String? { get set }
@@ -43,6 +42,10 @@ class MainPresenter: MainViewPresenterProtocol {
             self.arrayFonts = json.array
             self.view?.updateList()
         }
+        loadingSelectedImage { (data) in
+            let imageData = data.imageData
+            self.view?.uploadImage(imageData: imageData)
+        }
     }
     
     func getFonts(completion: @escaping(ListModel) -> Void) {
@@ -53,8 +56,19 @@ class MainPresenter: MainViewPresenterProtocol {
         }
     }
     
-    func loadingSelectedImage(urlImage: String, completion: @escaping(ImageModel) -> Void) {
+    func loadingSelectedImage(completion: @escaping(ImageModel) -> Void) {
+        let urlImage = "https://ronreiter-meme-generator.p.rapidapi.com/meme?meme=Net-Noob&top=%20&bottom=%20"
         networkService.downloadImage(urlString: urlImage) { data in
+            do {
+            let response = ImageModel(json: data)
+            completion(response)
+            }
+        }
+    }
+    
+    func loadingImage(completion: @escaping(ImageModel) -> Void) {
+        let urlImage = "https://ronreiter-meme-generator.p.rapidapi.com/meme?meme=Net-Noob&top=%20&bottom=%20"
+        NetworkService.shared.downloadImage(urlString: urlImage) { (data) in
             let response = ImageModel(json: data)
             completion(response)
         }

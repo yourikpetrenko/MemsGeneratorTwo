@@ -18,7 +18,11 @@ class MainVC: UIViewController {
         }
     }
     private var selectedFont: String?
-    private var imageData: UIImage?
+    private var imageData: UIImage? {
+        didSet {
+            downloadTheSelectedMeme()
+        }
+    }
     private var urlTop: String?
     private var urlBottom: String?
     private var urlFont: String?
@@ -44,7 +48,10 @@ class MainVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         downloadTheSelectedMeme()
-        print(currentMem)
+        presenter?.loadingSelectedImage(completion: { (data) in
+            self.imageData = UIImage(data: data.imageData)
+        })
+        print(imageData)
     }
    
     // MARK: - Botton to open the list of memes
@@ -58,6 +65,10 @@ class MainVC: UIViewController {
     // MARK: - Generatting meme
     @IBAction func memeGeneratingButton(_ sender: UIButton) {
         generatingMame()
+        presenter?.loadingSelectedImage(completion: { (imageData) in
+            print(imageData.imageData)
+            print("working")
+        })
     }
     
     // MARK: - Button for cleaning screen
@@ -104,6 +115,7 @@ extension MainVC: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDeleg
 //        self.elementPicker = UIPickerView()
         textFieldFontOutlet.inputView = elementPicker
         elementPicker.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
+       
     }
     
     // MARK: - Creating a toolbar for the UIPickerView, button implementation "Done".
@@ -135,19 +147,34 @@ extension MainVC: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDeleg
         //            }
     }
     
-    // MARK: - Networking Service. Load selected image.
-    func downloadTheSelectedMeme() {
-        let urlImage = "https://ronreiter-meme-generator.p.rapidapi.com/meme?meme=\(currentMem)&top=%20&bottom=%20"
+    // MARK: - Installing the downloaded image.
+    
+    private func settingImage() {
         if imageOutlet.image == nil {
+            activityIndicator.isHidden = true
+            activityIndicator.hidesWhenStopped = true
+        } else {
             activityIndicator.isHidden = false
+            activityIndicator.hidesWhenStopped = false
             activityIndicator.startAnimating()
         }
-        presenter?.loadingSelectedImage(urlImage: urlImage, completion: { data in
-            DispatchQueue.main.async {
-                self.imageOutlet.image = UIImage(data: data.imageData)
-                
-            }
-        })
+        self.imageOutlet.image = self.imageData
+        self.activityIndicator.stopAnimating()
+        self.activityIndicator.isHidden = true
+    }
+
+    // MARK: - Networking Service. Load selected image.
+    func downloadTheSelectedMeme() {
+        DispatchQueue.main.async {
+            print("\(self.imageData) update image")
+//            self.imageOutlet.image = self.imageData
+        }
+        
+//        let urlImage = "https://ronreiter-meme-generator.p.rapidapi.com/meme?meme=\(currentMem)&top=%20&bottom=%20"
+//        if imageOutlet.image == nil {
+//            activityIndicator.isHidden = false
+//            activityIndicator.startAnimating()
+//        }
 //        ImageNetworkService.getList(url: urlImage) { (image) in
 //            DispatchQueue.main.async {
 //                self.imageOutlet.image = UIImage(data: image.imageData)
@@ -236,10 +263,12 @@ extension MainVC: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDeleg
 }
 
 extension MainVC: MainViewProtocol {
-    func uploadImage() {
-        
-        print("upload image")
-}
+    func uploadImage(imageData: Data) {
+        DispatchQueue.main.async {
+            self.imageData = UIImage(data: imageData)
+            print(imageData)
+        }
+    }
     func updateList() {
         elementPicker.reloadAllComponents()
 //        print(presenter?.arrayFonts)

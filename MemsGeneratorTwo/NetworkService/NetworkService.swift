@@ -15,8 +15,8 @@ protocol NetworkServiceProtocol {
 }
 
 class NetworkService: NetworkServiceProtocol {
-//    private init() {}
-//    static let shared = NetworkService()
+//    init() {}
+    static let shared = NetworkService()
 
     // MARK: - Basic methods for working with the network
     func downloadList(urlString: String, completion: @escaping ([String]) -> Void) {
