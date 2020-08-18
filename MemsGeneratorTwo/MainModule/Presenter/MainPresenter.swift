@@ -9,14 +9,14 @@
 import UIKit
 
 protocol MainViewProtocol: class {
-    func updateList(arrayFonts: [String])
-    func uploadImage(image: UIImage)
+    func updateList()
+    func uploadImage()
 }
 
 protocol MainViewPresenterProtocol {
     init(with view: MainViewProtocol, networkService: NetworkServiceProtocol)
-    func getList(completion: @escaping(ListModel) -> Void)
-    func updateData(mem: String)
+    func getFonts(completion: @escaping(ListModel) -> Void)
+    func loadingSelectedImage(urlImage: String, completion: @escaping(ImageModel) -> Void)
     
     var arrayFonts: [String] { get set }
     var urlTop: String? { get set }
@@ -26,49 +26,37 @@ protocol MainViewPresenterProtocol {
 }
 
 class MainPresenter: MainViewPresenterProtocol {
+    
     weak var view: MainViewProtocol?
-
+    let networkService: NetworkServiceProtocol!
+    
     var urlTop: String?
     var urlBottom: String?
     var urlFont: String?
-    var currentMem = "" {
-        didSet {
-            
-        }
-    }
-    let networkService: NetworkServiceProtocol!
+    var currentMem = ""
     var arrayFonts = [String]()
-    let urlFonts = "https://ronreiter-meme-generator.p.rapidapi.com/fonts"
-
+    
     required init(with view: MainViewProtocol, networkService: NetworkServiceProtocol) {
-        print("SRABOTALO")
         self.view = view
         self.networkService = networkService
-        self.getList { (json) in
+        getFonts { (json) in
             self.arrayFonts = json.array
-            self.view?.updateList(arrayFonts: self.arrayFonts)
+            self.view?.updateList()
         }
     }
     
-    func updateData(mem: String) {
-        currentMem = mem
-    }
-    
-    func getList(completion: @escaping(ListModel) -> Void) {
+    func getFonts(completion: @escaping(ListModel) -> Void) {
+        let urlFonts = "https://ronreiter-meme-generator.p.rapidapi.com/fonts"
         networkService.downloadList(urlString: urlFonts) { json in
-            DispatchQueue.main.async {
-                let response = ListModel(json: json)
-                completion(response)
-            }
+            let response = ListModel(json: json)
+            completion(response)
         }
     }
     
-    func loadingSelectedImage(completion: @escaping(UIImage) -> Void) {
-        let urlImage = "https://ronreiter-meme-generator.p.rapidapi.com/meme?meme=\(self.currentMem)&top=%20&bottom=%20"
-        print(urlImage)
+    func loadingSelectedImage(urlImage: String, completion: @escaping(ImageModel) -> Void) {
         networkService.downloadImage(urlString: urlImage) { data in
-            guard let image = UIImage(data: data) else { return }
-            completion(image)
+            let response = ImageModel(json: data)
+            completion(response)
         }
     }
 }

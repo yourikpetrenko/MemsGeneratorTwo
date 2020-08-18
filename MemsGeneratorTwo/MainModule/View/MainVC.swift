@@ -10,10 +10,9 @@ import UIKit
 import Alamofire
 
 class MainVC: UIViewController {
-//  self.view.setNeedsDisplay()
 
     var presenter: MainViewPresenterProtocol?
-     var arrayFont = [String]() {
+         var arrayFont = [String]() {
         didSet {
             updatePicker()
         }
@@ -23,11 +22,7 @@ class MainVC: UIViewController {
     private var urlTop: String?
     private var urlBottom: String?
     private var urlFont: String?
-     var currentMem = "" {
-        didSet {
-            self.presenter?.updateData(mem: self.currentMem)
-        }
-    }
+    var currentMem = ""
     var elementPicker = UIPickerView()
     
     @IBOutlet weak var imageOutlet: UIImageView!
@@ -38,6 +33,8 @@ class MainVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        elementPicker.delegate = self
+        elementPicker.dataSource = self
         loadingFonts()
         createPickerView()
         createToolBar()
@@ -47,14 +44,14 @@ class MainVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         downloadTheSelectedMeme()
-        
+        print(currentMem)
     }
    
     // MARK: - Botton to open the list of memes
     
     @IBAction func buttonLeadingToTheList(_ sender: UIBarButtonItem) {
-        let listVC = ModelBuilder.createListModule()
-        navigationController?.pushViewController(listVC, animated: true)
+        let listVC = ModelBuilder()
+        navigationController?.pushViewController(listVC.createListModule(), animated: true)
 //        performSegue(withIdentifier: "listMemsSegue", sender: self)
     }
     
@@ -86,15 +83,15 @@ extension MainVC: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDeleg
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return arrayFont.count
+        return presenter?.arrayFonts.count ?? 0
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return arrayFont[row]
+        return presenter?.arrayFonts[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedFont = arrayFont[row]
+        selectedFont = presenter?.arrayFonts[row]
         textFieldFontOutlet.text = selectedFont
     }
     
@@ -104,8 +101,7 @@ extension MainVC: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDeleg
     
     // MARK: - Creating a UIPickerView for the font list.
     func createPickerView() {
-        self.elementPicker = UIPickerView()
-        elementPicker.delegate = self
+//        self.elementPicker = UIPickerView()
         textFieldFontOutlet.inputView = elementPicker
         elementPicker.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
     }
@@ -141,11 +137,17 @@ extension MainVC: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDeleg
     
     // MARK: - Networking Service. Load selected image.
     func downloadTheSelectedMeme() {
-//        let urlImage = "https://ronreiter-meme-generator.p.rapidapi.com/meme?meme=\(currentMem)&top=%20&bottom=%20"
+        let urlImage = "https://ronreiter-meme-generator.p.rapidapi.com/meme?meme=\(currentMem)&top=%20&bottom=%20"
         if imageOutlet.image == nil {
             activityIndicator.isHidden = false
             activityIndicator.startAnimating()
         }
+        presenter?.loadingSelectedImage(urlImage: urlImage, completion: { data in
+            DispatchQueue.main.async {
+                self.imageOutlet.image = UIImage(data: data.imageData)
+                
+            }
+        })
 //        ImageNetworkService.getList(url: urlImage) { (image) in
 //            DispatchQueue.main.async {
 //                self.imageOutlet.image = UIImage(data: image.imageData)
@@ -188,16 +190,16 @@ extension MainVC: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDeleg
     // MARK: - Passing information about the current meme.
     func transmittingIdMeme(identifierName: String) {
         currentMem = identifierName
+        print(identifierName)
+        print(currentMem)
     }
     
     // MARK: - Data transfer between ViewControllers.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "listMemsSegue" {
             let destanationListMems = segue.destination as? ListMemsVC
-            destanationListMems?.delegate = self
-        }
+        destanationListMems?.delegate = self
     }
-    
+        
     // MARK: - Dissmiss keyboard. By clicking on "Return"
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
@@ -234,15 +236,13 @@ extension MainVC: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDeleg
 }
 
 extension MainVC: MainViewProtocol {
-    func uploadImage(image: UIImage) {
-        DispatchQueue.main.async {
-        self.imageOutlet.image = image
-    }
+    func uploadImage() {
+        
+        print("upload image")
 }
-    func updateList(arrayFonts: [String]) {
-        DispatchQueue.main.async {
-            self.arrayFont = arrayFonts
-            self.elementPicker.reloadAllComponents()
-        }
+    func updateList() {
+        elementPicker.reloadAllComponents()
+//        print(presenter?.arrayFonts)
+//        print("update picker list")
     }
 }

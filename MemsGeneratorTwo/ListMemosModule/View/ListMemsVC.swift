@@ -10,9 +10,11 @@ import Alamofire
 
 class ListMemsVC: UITableViewController {
     
+    var completion: ((String) -> Void)?
     var presenter: ListViewPresenerProtocol?
     weak var delegate: CurrentMemeDelegate?
-    private var arrayMems = [String]()
+//    private var arrayMems = [String]()
+    var currentMem = ""
     private var textIndexPath: String?
     private var filteredMems = [String]()
     private var searchBarIsEmpty: Bool {
@@ -24,11 +26,11 @@ class ListMemsVC: UITableViewController {
         return searchController.isActive && !searchBarIsEmpty
     }
     private let searchController = UISearchController(searchResultsController: nil)
-
+    var identifierName = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        getListMems()
         settingSearchController()
     }
     // MARK: - Table view data source.
@@ -37,7 +39,7 @@ class ListMemsVC: UITableViewController {
         if isFiltering {
             return filteredMems.count
         }
-        return arrayMems.count
+        return presenter?.listMems.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -46,7 +48,7 @@ class ListMemsVC: UITableViewController {
         if isFiltering {
             memos = filteredMems[indexPath.row]
         } else {
-            memos = arrayMems[indexPath.row]
+            memos = presenter?.listMems[indexPath.row] ?? ""
         }
         cell.textLabel?.text = memos
         self.textIndexPath = memos
@@ -59,12 +61,23 @@ class ListMemsVC: UITableViewController {
             if isFiltering {
                 mems = filteredMems[indexPath.row]
             } else {
-                mems = arrayMems[indexPath.row]
+                mems = presenter?.listMems[indexPath.row] ?? ""
             }
         }
-        let identifierName = mems
-        delegate?.transmittingIdMeme(identifierName: identifierName)
+        currentMem = mems
+        transmittingId { (currentMem) in
+            let id = currentMem
+            print(id)
+            self.delegate?.transmittingIdMeme(identifierName: id)
+        }
         navigationController?.popViewController(animated: true)
+    }
+    
+    func transmittingId(completion: @escaping (String) -> Void) {
+        let id = self.identifierName
+        completion(id)
+        delegate?.transmittingIdMeme(identifierName: id)
+
     }
 }
 
@@ -75,7 +88,7 @@ extension ListMemsVC: UISearchResultsUpdating {
     }
 
     func filterForSearchText(_ searchText: String) {
-        filteredMems = arrayMems.filter({ (mems: String) -> Bool in
+        filteredMems = presenter!.listMems.filter({ (mems: String) -> Bool in
             return mems.lowercased().contains(searchText.lowercased())
         })
         tableView.reloadData()
@@ -88,20 +101,19 @@ extension ListMemsVC: UISearchResultsUpdating {
         navigationItem.searchController = searchController
         definesPresentationContext = true
     }
-
-    // MARK: - Network Service. Load list memes.
-    func getListMems() {
-//        let urlListMems = "https://ronreiter-meme-generator.p.rapidapi.com/images"
-//        ListNetworkService.getList(url: urlListMems) { (response) in
-//            self.arrayMems = response.array
-//            self.tableView.reloadData()
-//        }
-    }
 }
 
 extension ListMemsVC: ListViewProtocol {
-    func updateList(arrayMems: [String]) {
-        self.arrayMems = arrayMems
+    func updateList() {
         self.tableView.reloadData()
+    }
+}
+
+extension ListMemsVC {
+    // MARK: - Passing information about the current meme.
+    
+    private func getCurrentMemsAndBack() {
+        completion?(currentMem)
+    
     }
 }

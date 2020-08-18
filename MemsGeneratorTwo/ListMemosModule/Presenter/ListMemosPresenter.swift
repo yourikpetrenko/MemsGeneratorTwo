@@ -9,7 +9,7 @@
 import Foundation
 
 protocol ListViewProtocol: class {
-    func updateList(arrayMems: [String])
+    func updateList()
 }
 
 protocol ListViewPresenerProtocol: class {
@@ -22,25 +22,24 @@ class ListPresenter: ListViewPresenerProtocol {
     weak var view: ListViewProtocol?
     let networkService: NetworkServiceProtocol!
     var listMems = [String]()
+    var currentMem = ""
     let urlListMems = "https://ronreiter-meme-generator.p.rapidapi.com/images"
-
+    
     required init(view: ListViewProtocol, networkService: NetworkServiceProtocol) {
         self.view = view
         self.networkService = networkService
         getMems { (json) in
             self.listMems = json.array
-            self.view?.updateList(arrayMems: self.listMems)
+            self.view?.updateList()
         }
-        print("SRABOTALO list")
-        
     }
-
+    
     func getMems(completion: @escaping(ListModel) -> Void) {
         networkService.downloadList(urlString: urlListMems) { json in
-            DispatchQueue.main.async {
+//            DispatchQueue.main.async {
                 let response = ListModel(json: json)
                 completion(response)
-            }
+
         }
     }
 }

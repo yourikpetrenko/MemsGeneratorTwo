@@ -10,7 +10,7 @@ import UIKit
 
 protocol Builder {
     func createMainModule() -> UIViewController
-   static func createListModule() -> UIViewController
+    func createListModule() -> UIViewController
 }
 
 class ModelBuilder: Builder {
@@ -23,7 +23,7 @@ class ModelBuilder: Builder {
         return navigationController
     }
     
-    static func createListModule() -> UIViewController {
+     func createListModule() -> UIViewController {
         let listVC = ListMemsVC()
         let networkService = NetworkService()
         let presenter = ListPresenter(view: listVC, networkService: networkService)
