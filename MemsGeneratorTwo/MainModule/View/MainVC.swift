@@ -10,23 +10,30 @@ import UIKit
 import Alamofire
 
 class MainVC: UIViewController {
-
+    
     var presenter: MainViewPresenterProtocol?
-         var arrayFont = [String]() {
+    var arrayFont = [String]() {
         didSet {
             updatePicker()
         }
     }
+    
     private var selectedFont: String?
     private var imageData: UIImage? {
         didSet {
-            downloadTheSelectedMeme()
+            //            settingImage()
         }
     }
+    
     private var urlTop: String?
     private var urlBottom: String?
     private var urlFont: String?
-    var currentMem = ""
+    var currentMem = "" {
+        didSet {
+            print(currentMem)
+        }
+    }
+    
     var elementPicker = UIPickerView()
     
     @IBOutlet weak var imageOutlet: UIImageView!
@@ -39,36 +46,35 @@ class MainVC: UIViewController {
         super.viewDidLoad()
         elementPicker.delegate = self
         elementPicker.dataSource = self
-        loadingFonts()
         createPickerView()
         createToolBar()
         registerForKeyboardNotifications()
+        monitoringTheSelectedMem()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        downloadTheSelectedMeme()
+        //        settingImage()
         presenter?.loadingSelectedImage(completion: { (data) in
             self.imageData = UIImage(data: data.imageData)
         })
-        print(imageData)
     }
-   
+    
     // MARK: - Botton to open the list of memes
     
     @IBAction func buttonLeadingToTheList(_ sender: UIBarButtonItem) {
         let listVC = ModelBuilder()
         navigationController?.pushViewController(listVC.createListModule(), animated: true)
-//        performSegue(withIdentifier: "listMemsSegue", sender: self)
+        //        performSegue(withIdentifier: "listMemsSegue", sender: self)
     }
     
     // MARK: - Generatting meme
+    
     @IBAction func memeGeneratingButton(_ sender: UIButton) {
-        generatingMame()
-        presenter?.loadingSelectedImage(completion: { (imageData) in
-            print(imageData.imageData)
-            print("working")
-        })
+        convertingTextForUrl()
+        let urlDoneMem = "https://ronreiter-meme-generator.p.rapidapi.com/meme?font=\(urlFont ?? "")&font_size=50&meme=\(currentMem)&top=\(urlTop ?? "")&bottom=\(urlBottom ?? "")"
+        NotificationCenter.default.post(name: Notification.Name("generatingMem"), object: urlDoneMem)
+        
     }
     
     // MARK: - Button for cleaning screen
@@ -86,7 +92,7 @@ class MainVC: UIViewController {
     }
 }
 
-extension MainVC: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, CurrentMemeDelegate {
+extension MainVC: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
     // MARK: - Setting UIPickerView
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -107,18 +113,20 @@ extension MainVC: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDeleg
     }
     
     func updatePicker() {
-       self.elementPicker.reloadAllComponents()
+        self.elementPicker.reloadAllComponents()
     }
     
     // MARK: - Creating a UIPickerView for the font list.
+    
     func createPickerView() {
-//        self.elementPicker = UIPickerView()
+        //        self.elementPicker = UIPickerView()
         textFieldFontOutlet.inputView = elementPicker
         elementPicker.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
-       
+        
     }
     
     // MARK: - Creating a toolbar for the UIPickerView, button implementation "Done".
+    
     func createToolBar() {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
@@ -138,15 +146,6 @@ extension MainVC: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDeleg
         view.endEditing(true)
     }
     
-    // MARK: - Networking Service. Load fonts list.
-    
-    func loadingFonts() {
-        //            let urlFonts = "https://ronreiter-meme-generator.p.rapidapi.com/fonts"
-        //            ListNetworkService.getList(url: urlFonts) { (arrayFont) in
-        //                self.arrayFont = arrayFont.array
-        //            }
-    }
-    
     // MARK: - Installing the downloaded image.
     
     private func settingImage() {
@@ -162,44 +161,17 @@ extension MainVC: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDeleg
         self.activityIndicator.stopAnimating()
         self.activityIndicator.isHidden = true
     }
-
-    // MARK: - Networking Service. Load selected image.
-    func downloadTheSelectedMeme() {
-        DispatchQueue.main.async {
-            print("\(self.imageData) update image")
-//            self.imageOutlet.image = self.imageData
-        }
-        
-//        let urlImage = "https://ronreiter-meme-generator.p.rapidapi.com/meme?meme=\(currentMem)&top=%20&bottom=%20"
-//        if imageOutlet.image == nil {
-//            activityIndicator.isHidden = false
-//            activityIndicator.startAnimating()
-//        }
-//        ImageNetworkService.getList(url: urlImage) { (image) in
-//            DispatchQueue.main.async {
-//                self.imageOutlet.image = UIImage(data: image.imageData)
-//                self.activityIndicator.isHidden = true
-//                self.activityIndicator.stopAnimating()
-//                if self.imageOutlet.image == nil {
-//                    self.imageOutlet.image = UIImage(imageLiteralResourceName: "jdun")
-//                }
-//            }
-//        }
-    }
     
-    // MARK: - Network Service. Generate memos.
-    func generatingMame() {
-        convertingTextForUrl()
-        
-//        let urlDoneMem = "https://ronreiter-meme-generator.p.rapidapi.com/meme?font=\(urlFont ?? "")&font_size=50&meme=\(currentMem)&top=\(urlTop ?? "")&bottom=\(urlBottom ?? "")"
-//        ImageNetworkService.getList(url: urlDoneMem) { (image) in
-//            DispatchQueue.main.async {
-//                self.imageOutlet.image = UIImage(data: image.imageData)
-//            }
-//        }
+    // MARK: - Networking Service. Load selected image.
+    
+    func settingImageMem() {
+        DispatchQueue.main.async {
+            //  self.imageOutlet.image = self.imageData
+        }
     }
     
     // MARK: - Adaptation of the text for the url address.
+    
     func convertingTextForUrl() {
         urlTop = textFieldTopOutlet.text?.components(separatedBy: " ").filter { !$0.isEmpty }.joined(separator: "%20")
         urlBottom = textFieldBottomOutlet.text?.components(separatedBy: " ").filter { !$0.isEmpty }.joined(separator: "%20")
@@ -207,6 +179,7 @@ extension MainVC: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDeleg
     }
     
     // MARK: - Implementation of functionality for the ability to share.
+    
     func presentActivityViewController() {
         guard let image = imageOutlet.image else { return }
         let items: [Any] = [image]
@@ -215,19 +188,15 @@ extension MainVC: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDeleg
     }
     
     // MARK: - Passing information about the current meme.
+    
     func transmittingIdMeme(identifierName: String) {
         currentMem = identifierName
         print(identifierName)
         print(currentMem)
     }
     
-    // MARK: - Data transfer between ViewControllers.
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            let destanationListMems = segue.destination as? ListMemsVC
-        destanationListMems?.delegate = self
-    }
-        
     // MARK: - Dissmiss keyboard. By clicking on "Return"
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
@@ -262,6 +231,8 @@ extension MainVC: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDeleg
     }
 }
 
+// MARK: - Setting received data from the presenter
+
 extension MainVC: MainViewProtocol {
     func uploadImage(imageData: Data) {
         DispatchQueue.main.async {
@@ -269,9 +240,21 @@ extension MainVC: MainViewProtocol {
             print(imageData)
         }
     }
+    
     func updateList() {
         elementPicker.reloadAllComponents()
-//        print(presenter?.arrayFonts)
-//        print("update picker list")
+    }
+}
+
+extension MainVC {
+    // MARK: - Method for observing a selected meme
+    
+    func monitoringTheSelectedMem() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: Notification.Name("settingSelectedMem"), object: nil)
+    }
+    
+    @objc func methodOfReceivedNotification(notification: Notification) {
+        let mem = notification.object as? String
+        self.currentMem = mem ?? ""
     }
 }

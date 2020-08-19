@@ -9,12 +9,8 @@ import UIKit
 import Alamofire
 
 class ListMemsVC: UITableViewController {
-    
-    var completion: ((String) -> Void)?
-    var presenter: ListViewPresenerProtocol?
-    weak var delegate: CurrentMemeDelegate?
-//    private var arrayMems = [String]()
     var currentMem = ""
+    var presenter: ListViewPresenerProtocol?
     private var textIndexPath: String?
     private var filteredMems = [String]()
     private var searchBarIsEmpty: Bool {
@@ -25,8 +21,8 @@ class ListMemsVC: UITableViewController {
     private var isFiltering: Bool {
         return searchController.isActive && !searchBarIsEmpty
     }
-    private let searchController = UISearchController(searchResultsController: nil)
-    var identifierName = ""
+    
+    private let searchController = UISearchController(searchResultsController: nil)    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,23 +61,13 @@ class ListMemsVC: UITableViewController {
             }
         }
         currentMem = mems
-        transmittingId { (currentMem) in
-            let id = currentMem
-            print(id)
-            self.delegate?.transmittingIdMeme(identifierName: id)
-        }
+        NotificationCenter.default.post(name: Notification.Name("settingSelectedMem"), object: self.currentMem)
         navigationController?.popViewController(animated: true)
-    }
-    
-    func transmittingId(completion: @escaping (String) -> Void) {
-        let id = self.identifierName
-        completion(id)
-        delegate?.transmittingIdMeme(identifierName: id)
-
     }
 }
 
 // MARK: - Work over UISearchController.
+
 extension ListMemsVC: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         filterForSearchText(searchController.searchBar.text!)
@@ -103,17 +89,10 @@ extension ListMemsVC: UISearchResultsUpdating {
     }
 }
 
+// MARK: - Update tableView after loading data
+
 extension ListMemsVC: ListViewProtocol {
     func updateList() {
         self.tableView.reloadData()
-    }
-}
-
-extension ListMemsVC {
-    // MARK: - Passing information about the current meme.
-    
-    private func getCurrentMemsAndBack() {
-        completion?(currentMem)
-    
     }
 }

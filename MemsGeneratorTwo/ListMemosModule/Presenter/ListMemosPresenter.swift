@@ -18,6 +18,8 @@ protocol ListViewPresenerProtocol: class {
     var listMems: [String] {get set}
 }
 
+// MARK: - ListPresenter manages logic ListMemsVC
+
 class ListPresenter: ListViewPresenerProtocol {
     weak var view: ListViewProtocol?
     let networkService: NetworkServiceProtocol!
@@ -34,9 +36,10 @@ class ListPresenter: ListViewPresenerProtocol {
         }
     }
     
+    // MARK: - Networking. Loading list mems
+
     func getMems(completion: @escaping(ListModel) -> Void) {
         networkService.downloadList(urlString: urlListMems) { json in
-//            DispatchQueue.main.async {
                 let response = ListModel(json: json)
                 completion(response)
 
