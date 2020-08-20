@@ -11,7 +11,6 @@
 		E2706DED24E27F270030C1A6 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = E2706DEC24E27F270030C1A6 /* .gitignore */; };
 		E2A0711024E67FA800E11A8C /* FontsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A0710F24E67FA800E11A8C /* FontsModel.swift */; };
 		E2A1475024E52D5F00656D39 /* ModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A1474F24E52D5F00656D39 /* ModuleBuilder.swift */; };
-		E2A59F3324DD3474000D910F /* CurrentMemeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A59F3224DD3474000D910F /* CurrentMemeDelegate.swift */; };
 		E2DA813624C9BF51006D6CD3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DA813524C9BF51006D6CD3 /* AppDelegate.swift */; };
 		E2DA813824C9BF51006D6CD3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DA813724C9BF51006D6CD3 /* SceneDelegate.swift */; };
 		E2DA813A24C9BF51006D6CD3 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DA813924C9BF51006D6CD3 /* MainVC.swift */; };
@@ -35,7 +34,6 @@
 		E2706DEC24E27F270030C1A6 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		E2A0710F24E67FA800E11A8C /* FontsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsModel.swift; sourceTree = "<group>"; };
 		E2A1474F24E52D5F00656D39 /* ModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleBuilder.swift; sourceTree = "<group>"; };
-		E2A59F3224DD3474000D910F /* CurrentMemeDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentMemeDelegate.swift; sourceTree = "<group>"; };
 		E2DA813224C9BF51006D6CD3 /* MemsGeneratorTwo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemsGeneratorTwo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2DA813524C9BF51006D6CD3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E2DA813724C9BF51006D6CD3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -120,7 +118,6 @@
 				E2DA813724C9BF51006D6CD3 /* SceneDelegate.swift */,
 				E2DA813B24C9BF51006D6CD3 /* Main.storyboard */,
 				E2DA814024C9BF55006D6CD3 /* LaunchScreen.storyboard */,
-				E2A59F3224DD3474000D910F /* CurrentMemeDelegate.swift */,
 				E2E9F77024E40E7500B365FA /* MainModule */,
 				E2E9F77824E418A000B365FA /* ListMemosModule */,
 				E21BCB8424D953E000677187 /* NetworkService */,
@@ -354,7 +351,6 @@
 				E2DA813824C9BF51006D6CD3 /* SceneDelegate.swift in Sources */,
 				E2A1475024E52D5F00656D39 /* ModuleBuilder.swift in Sources */,
 				E2DA814A24C9C17A006D6CD3 /* ListMemsVC.swift in Sources */,
-				E2A59F3324DD3474000D910F /* CurrentMemeDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

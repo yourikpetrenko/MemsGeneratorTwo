@@ -12,7 +12,7 @@ import Alamofire
 class MainVC: UIViewController {
     
     var presenter: MainViewPresenterProtocol?
-    var arrayFont = [String]() {
+    private var arrayFont = [String]() {
         didSet {
             updatePicker()
         }
@@ -34,7 +34,7 @@ class MainVC: UIViewController {
         }
     }
     
-    var elementPicker = UIPickerView()
+    private var elementPicker = UIPickerView()
     
     @IBOutlet weak var imageOutlet: UIImageView!
     @IBOutlet weak var textFieldTopOutlet: UITextField!
