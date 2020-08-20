@@ -9,15 +9,21 @@
 import UIKit
 import Alamofire
 
-class MainVC: UIViewController {
+final class MainVC: UIViewController {
     
+    var imageNetworkService: ImageNetworkServiceProtocol = ImageNetworkService()
+    var listNetworkService: ListNetworkServiceProtocol = ListNetworkService()
     private var arrayFont = [String]()
     private var selectedFont: String?
     private var imageData: UIImage?
     private var urlTop: String?
     private var urlBottom: String?
     private var urlFont: String?
-    private var currentMem = ""
+    private var currentMem = "" {
+        didSet {
+            setupImage()
+        }
+    }
     
     @IBOutlet weak var imageOutlet: UIImageView!
     @IBOutlet weak var textFieldTopOutlet: UITextField!
@@ -27,20 +33,14 @@ class MainVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        settingDefaultImage()
         fontLoad()
         textFieldTopOutlet.delegate = self
         textFieldBottomOutlet.delegate = self
         createToolBar()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        setupImage()
-        
-    }
-    
-    @IBAction func listMemsButton(_ sender: UIBarButtonItem) {
+    @IBAction func goToTheListOfMemes(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "listMemsSegue", sender: self)
     }
     
@@ -48,7 +48,7 @@ class MainVC: UIViewController {
         generateImage()
     }
     
-    @IBAction func clearButtom(_ sender: UIBarButtonItem) {
+    @IBAction func cleaningButtom(_ sender: UIBarButtonItem) {
         self.imageOutlet.image = UIImage(imageLiteralResourceName: "jdun")
         self.activityIndicator.isHidden = true
         self.textFieldTopOutlet.text = nil
@@ -57,10 +57,10 @@ class MainVC: UIViewController {
     }
     
     @IBAction func toShare(_ sender: UIBarButtonItem) {
-        activityViewController()
+        settingActivityViewController()
     }
-    
 }
+
 extension MainVC: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, CurrentMemeDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -69,19 +69,21 @@ extension MainVC: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDeleg
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return arrayFont.count
     }
+    
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return arrayFont[row]
     }
+    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedFont = arrayFont[row]
         textFieldFontOutlet.text = selectedFont
-        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
     }
+    
     func createToolBar() {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
@@ -93,6 +95,7 @@ extension MainVC: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDeleg
         toolbar.isUserInteractionEnabled = true
         textFieldFontOutlet.inputAccessoryView = toolbar
     }
+    
     @objc func dismissKeyboard() {
         urlFont = textFieldFontOutlet.text ?? ""
         view.endEditing(true)
@@ -105,7 +108,7 @@ extension MainVC: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDeleg
         elementPicker.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
         
         let urlFonts = "https://ronreiter-meme-generator.p.rapidapi.com/fonts"
-        ListNetworkService.getList(url: urlFonts) { (arrayFont) in
+        listNetworkService.getList(url: urlFonts) { (arrayFont) in
             self.arrayFont = arrayFont.array
         }
     }
@@ -116,14 +119,11 @@ extension MainVC: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDeleg
             activityIndicator.isHidden = false
             activityIndicator.startAnimating()
         }
-        ImageNetworkService.getList(url: urlImage) { (image) in
+        imageNetworkService.getImage(url: urlImage) { (image) in
             DispatchQueue.main.async {
                 self.imageOutlet.image = UIImage(data: image.imageData)
                 self.activityIndicator.isHidden = true
                 self.activityIndicator.stopAnimating()
-                if self.imageOutlet.image == nil {
-                    self.imageOutlet.image = UIImage(imageLiteralResourceName: "jdun")
-                }
             }
         }
     }
@@ -131,7 +131,7 @@ extension MainVC: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDeleg
     func generateImage() {
         editText()
         let urlDoneMem = "https://ronreiter-meme-generator.p.rapidapi.com/meme?font=\(urlFont ?? "")&font_size=50&meme=\(currentMem)&top=\(urlTop ?? "")&bottom=\(urlBottom ?? "")"
-        ImageNetworkService.getList(url: urlDoneMem) { (image) in
+        imageNetworkService.getImage(url: urlDoneMem) { (image) in
             DispatchQueue.main.async {
                 self.imageOutlet.image = UIImage(data: image.imageData)
             }
@@ -144,19 +144,28 @@ extension MainVC: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDeleg
         urlFont = textFieldFontOutlet.text?.components(separatedBy: " ").filter { !$0.isEmpty }.joined(separator: "%20")
     }
     
-    func activityViewController() {
+    func settingActivityViewController() {
         guard let image = imageOutlet.image else { return }
         let items: [Any] = [image]
         let avc = UIActivityViewController(activityItems: items, applicationActivities: nil)
         self.present(avc, animated: true, completion: nil)
     }
+    
     func transmittingIdMeme(id: String) {
         currentMem = id
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "listMemsSegue" {
-            let destanationListMems = segue.destination as! ListMems
-            destanationListMems.delegate = self
+        if case let listMemsVC as ListMemsVC = segue.destination {
+        listMemsVC.completion = { [weak self] mem in
+            self?.currentMem = mem
+        }
+    }
+}
+    
+    func settingDefaultImage() {
+        if self.imageOutlet.image == nil {
+            self.imageOutlet.image = UIImage(imageLiteralResourceName: "jdun")
         }
     }
 }

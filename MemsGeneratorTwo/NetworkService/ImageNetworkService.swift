@@ -7,10 +7,15 @@
 //
 
 import Foundation
-class ImageNetworkService {
-    private init() {}
-    static func getList(url: String, completion: @escaping(ImageModel) -> ()) {
-        NetworkService.shared.downloadImage(urlString: url) { (response) in
+
+protocol ImageNetworkServiceProtocol {
+    func getImage(url: String, completion: @escaping(ImageModel) -> ())
+}
+
+final class ImageNetworkService: ImageNetworkServiceProtocol {
+    var networkService: NetworkServiceProtocol = NetworkService()
+    func getImage(url: String, completion: @escaping(ImageModel) -> ()) {
+        networkService.downloadImage(urlString: url) { (response) in
             do {
                 let response = ImageModel(json: response)
                 completion(response)

@@ -7,10 +7,15 @@
 //
 
 import Foundation
-class ListNetworkService {
-    private init() {}    
-    static func getList(url: String, completion: @escaping(ListModel) -> ()) {
-        NetworkService.shared.downloadList(urlString: url) { (json) in
+
+protocol ListNetworkServiceProtocol {
+    func getList(url: String, completion: @escaping(ListModel) -> ())
+}
+
+final class ListNetworkService: ListNetworkServiceProtocol {
+    var networkService: NetworkServiceProtocol = NetworkService()
+    func getList(url: String, completion: @escaping(ListModel) -> ()) {
+        networkService.downloadList(urlString: url) { (json) in
             do {
                 let response = ListModel(json: json)
                 completion(response)

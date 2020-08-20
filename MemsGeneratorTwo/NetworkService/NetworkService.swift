@@ -9,9 +9,12 @@
 import Foundation
 import Alamofire
 
-class NetworkService {
-    private init() {}
-    static let shared = NetworkService()
+protocol NetworkServiceProtocol {
+    func downloadList(urlString: String, completion: @escaping ([String]) -> Void)
+    func downloadImage(urlString: String, completion: @escaping (Data) -> Void)
+}
+
+final class NetworkService: NetworkServiceProtocol {
     func downloadList(urlString: String, completion: @escaping ([String]) -> Void) {
         let headers: HTTPHeaders = [
             "x-rapidapi-host": "ronreiter-meme-generator.p.rapidapi.com",

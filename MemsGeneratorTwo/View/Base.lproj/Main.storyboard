@@ -77,13 +77,13 @@
                     <navigationItem key="navigationItem" id="TdR-Is-ugW">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="trash" catalog="system" id="yJD-XD-mou">
                             <connections>
-                                <action selector="clearButtom:" destination="BYZ-38-t0r" id="M4o-0m-Baz"/>
+                                <action selector="cleaningButtom:" destination="BYZ-38-t0r" id="M4o-0m-Baz"/>
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem title="Item" image="rectangle.grid.3x2" catalog="system" id="HYj-Ps-CLc">
                                 <connections>
-                                    <action selector="listMemsButton:" destination="BYZ-38-t0r" id="SR3-Od-tlY"/>
+                                    <action selector="goToTheListOfMemes:" destination="BYZ-38-t0r" id="SR3-Od-tlY"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem title="Item" image="square.and.arrow.up" catalog="system" id="PfG-2R-7ZZ">
@@ -106,10 +106,10 @@
             </objects>
             <point key="canvasLocation" x="908.69565217391312" y="126.5625"/>
         </scene>
-        <!--List Mems-->
+        <!--List MemsVC-->
         <scene sceneID="2Ho-yO-qSh">
             <objects>
-                <tableViewController id="JTV-kf-E69" customClass="ListMems" customModule="MemsGeneratorTwo" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="JTV-kf-E69" customClass="ListMemsVC" customModule="MemsGeneratorTwo" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="e1d-g9-TwN">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
